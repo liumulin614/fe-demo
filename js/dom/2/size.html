@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        body{
+            height: 2000px;
+        }
+        .wrapper{
+            width: 800px;
+            margin: 20px auto;
+            border: 2px solid #000000;
+            padding: 15px;
+        }
+        .wrapper2{
+            margin: 40px;
+            position: relative;
+        }
+        .abs{
+            position: absolute;
+            padding: 10px;
+            border: 2px solid #3c510c;
+        }
+        .fixed{
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="wrapper1" class="wrapper">
+    <div id="div1" class="abs">真的么</div>
+    <div id="div2" class="noraml">这是一个正常的div</div>
+    <div class="wrapper2">
+        <input type="button" id="button" value="我是一个按钮"/>
+    </div>
+    <div>
+        <input id="button2" type="button" value="GO TO TOP" class="fixed">
+    </div>
+</div>
+<script>
+
+    travel(document.getElementById("wrapper1"));
+
+    function travel(ele){
+        if(ele.nodeType != 1){
+            throw new Error("argument required an instance of HMTLElement, but "+ele.nodeType+" was present");
+        }
+        document.write(ele.nodeName+":"+ele.nodeType+"<br/>");
+        var children = ele.children,i = 0, len,item;
+        for(len = children.length ; i < len ; i++){
+            item = children[i];
+            if(item.nodeType == 1){
+                travel(item);
+            }
+        }
+    }
+
+    var sizeUtil = (function(){
+        var offset;
+        function checkElement(ele){
+            if(ele.nodeType != 1){
+                throw new Error("argument required an instance of HMTLElement, but "+ele.nodeType+" was present");
+            }
+        }
+        return {
+            getOffsetLeftInPage:function(ele){
+                checkElement(ele);
+                var offsetLeft = ele.offsetLeft, offsetParent = ele;
+                while((offsetParent = offsetParent.offsetParent ) != null){
+                    offsetLeft += offsetParent.offsetLeft;
+                }
+                return offsetLeft;
+            },
+            getOffsetTopInPage:function(ele){
+                checkElement(ele);
+                var offsetTop = ele.offsetTop, offsetParent = ele;
+                while((offsetParent = offsetParent.offsetParent ) != null){
+                    offsetTop += offsetParent.offsetTop;
+                }
+                return offsetTop;
+            },
+            getBrowserSize:function(){
+                var result = {w:0, h:0};
+                if(document.compatMode.toLowerCase() == "backcompat"){
+                    var html = document.documentElement;
+                    result.w = html.clientWidth;
+                    result.h =  html.clientHeight;
+                }else{
+                    var body = document.body;
+                    result.w = body.clientWidth;
+                    result.h = body.clientHeight;
+                }
+                return result;
+            },
+            getBoundingClientRect:function(ele){
+                checkElement(ele);
+                var scrollTop = Math.max(document.documentElement.scrollTop, document.body.scrollTop);
+                var scrollLeft = Math.max(document.documentElement.scrollLeft, document.body.scrollLeft);
+                if(ele.getBoundingClientRect){
+                    if(!offset){
+                        var temp = document.createElement("div");
+                        temp.style.cssText = "position:absolute;left:0px;top:0px";
+                        document.body.appendChild(temp);
+                        offset = -temp.getBoundingClientRect().top - scrollTop;
+                        document.body.removeChild(temp);
+                        temp = null;
+                    }
+                    var rect = ele.getBoundingClientRect();
+                    return {
+                        top:rect.top + offset,
+                        bottom:rect.bottom + offset,
+                        left:rect.left + offset,
+                        right:rect.right + offset
+                    }
+                }else{
+                    var offsetPageTop = this.getOffsetTopInPage(ele);
+                    var offsetPageLeft = this.getOffsetLeftInPage(ele);
+                    return {
+                        top:offsetPageTop - scrollTop,
+                        bottom:offsetPageTop + ele.offsetHeight - scrollTop,
+                        left:offsetPageLeft - scrollLeft,
+                        right:offsetPageLeft + ele.offsetWidth - scrollLeft
+                    }
+                }
+            }
+        }
+    }())
+</script>
+<script type="text/javascript">
+    var div1 = document.getElementById("div1"),
+            wrapper = document.getElementById("wrapper1"),
+            button = document.getElementById("button");
+
+
+
+    var timer;
+    document.getElementById("button2").onclick = function(){
+        alert(button.getBoundingClientRect().top);
+    }
+
+
+    function setScrollTop(){
+        var h = document.documentElement.scrollTop;
+        console.log(h);
+        h = h > 0 ? h - 50 : 0;
+        console.log(h);
+        document.documentElement.scrollTop = h;
+        if(h > 0){
+            setTimeout(setScrollTop,10);
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title></title>
+	<style type="text/css">
+	body{color:#FFF;}
+	#hd,#ft{padding:20px 0;text-align: center;background-color: #ccc;}
+	.wrapper{overflow: hidden;zoom:1;margin: 10px 0;position: relative;}
+	.main{background-color: #03a9f4;padding: 20px 0;text-align: center;float: left;width: 100%;}
+	.aside{width:200px;background-color: #00bcd4;padding: 20px 0;text-align: center;float: left;}
+	#rl{padding-left: 210px;}
+	#rl .aside{margin-left: -100%;}
+	
+	#lr{padding-right: 210px;}
+	#lr .aside{margin-left:-200px;position: relative;left:210px;}
+
+	#rlr{padding:0 210px 0 210px;}
+	#rlr .left-side{margin-left: -100%;position: relative;left:-210px;_left:210px;}
+	#rlr .right-side{margin-left: -200px;position:relative;left:210px;}
+
+	#lrr{padding:0 420px 0 0;}
+	#lrr .left-side{margin-left: -200px;position: relative;left:210px;}
+	#lrr .right-side{margin-left:-200px;position: relative;left:420px;}
+
+	#rrl{padding:0 0 0 420px;}
+	#rrl .left-side{margin-left: -100%;position: relative;left:-420px;_left:0px;}
+	#rrl .right-side{margin-left:-100%;position: relative;left:-210px;_left:210px;}
+	</style>
+</head>
+<body>
+<div id="hd">头部</div>
+<!--二部分圣杯第一种：主内容在右侧-->
+<div id="rl" class="wrapper">
+ <div class="main">主内容</div>
+ <div class="aside">侧边栏</div>
+</div>
+<!--二部分圣杯第二种：主内容在左侧-->
+<div id="lr" class="wrapper">
+ <div class="main">主内容</div>
+ <div class="aside">侧边栏</div>
+</div>
+<!--三部分圣杯第一种：主内容在左侧-->
+<div id="rlr" class="wrapper">
+<div class="main">主内容</div>
+<div class="aside left-side">左侧边栏</div>
+<div class="aside right-side">右侧边栏</div>
+</div>
+<!--三部分圣杯第一种：主内容在左侧-->
+<div id="lrr" class="wrapper">
+<div class="main">主内容</div>
+<div class="aside left-side">左侧边栏</div>
+<div class="aside right-side">右侧边栏</div>
+</div>
+<!--三部分圣杯第一种：主内容在左侧-->
+<div id="rrl" class="wrapper">
+<div class="main">主内容</div>
+<div class="aside left-side">左侧边栏</div>
+<div class="aside right-side">右侧边栏</div>
+</div>
+
+<div id="ft">底部</div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>vertical-align_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<style>
+.test p{border:1px solid #000;font-size:36px;line-height:2;}
+.test a{margin-left:5px;font-size:20px;}
+.baseline a{vertical-align:baseline;}
+.sub a{vertical-align:sub;}
+.super a{vertical-align:super;}
+.top a{vertical-align:top;}
+.text-top a{vertical-align:text-top;}
+.middle a{vertical-align:middle;}
+.bottom a{vertical-align:bottom;}
+.text-bottom a{vertical-align:text-bottom;}
+.length a{vertical-align:10px;}
+.mulit_line{line-height:150px; border:1px dashed #cccccc; padding-left:5px;}
+.mulit_line span{display:-moz-inline-stack; display:inline-block; line-height:1.4em; vertical-align:middle;}
+.mulit_line i{width:0; display:-moz-inline-stack; display:inline-block; vertical-align:middle; font-size:0;}
+</style>
+</head>
+<body>
+<ul class="test">
+	<li class="baseline">
+		<strong>与基线对齐</strong>
+		<p>参考内容<a href="?">基线对齐</a></p>
+	</li>
+	<li class="sub">
+		<strong>与参考内容的下标对齐</strong>
+		<p>参考内容<a href="?">下标对齐</a></p>
+	</li>
+	<li class="super">
+		<strong>与参考内容的上标对齐</strong>
+		<p>参考内容<a href="?">上标对齐</a></p>
+	</li>
+	<li class="top">
+		<strong>对象的内容与对象顶端对齐</strong>
+		<p>参考内容<a href="?">要对齐的内容</a></p>
+	</li>
+	<li class="text-top">
+		<strong>对象的文本与对象顶端对齐</strong>
+		<p>参考内容<a href="?">要对齐的内容</a></p>
+	</li>
+	<li class="middle">
+		<strong>对象的内容与对象中部对齐</strong>
+		<p>参考内容<a href="?">要对齐的内容</a></p>
+	</li>
+	<li class="bottom">
+		<strong>对象的内容与对象底端对齐</strong>
+		<p>参考内容<a href="?">要对齐的内容</a></p>
+	</li>
+	<li class="text-bottom">
+		<strong>对象的文本与对象顶端对齐</strong>
+		<p>参考内容<a href="?">要对齐的内容</a></p>
+	</li>
+	<li class="length">
+		<strong>与基线算起的偏移量</strong>
+		<p>参考内容<a href="?">偏移量对齐</a></p>
+	</li>
+
+
+<div style="border: 1px solid #CCC; height: 200px;line-height: 5">
+  
+   <span style="vertical-align: bottom;">dd我的x</span>
+     eex
+    <span style="width: 5px; display: inline-block; margin-right: -1px; height: 100%; vertical-align: middle;background: #0f0"></span>
+</div>
+</ul>
+
+<p class="mulit_line">
+    <span style="font-size:12px;">这里是高度为150像素的标签内的多行文字，文字大小为12像素。<br />这里是第二行，用来测试多行的显示效果。</span><i>&nbsp;</i>
+</p>
+
+<a style="display:inline-block;width:100px;height30px;line-height: 30px;background: #f00;color: #fff;">
+按钮测试
+</a>
+</body>
+</html>
+			

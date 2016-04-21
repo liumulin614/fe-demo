@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset = "UTF-8"/>
+	<title>Vertical Align</title>
+	<style type="text/css">
+		body{
+			/*font-size: 50px;*/
+			margin: 0px;
+		}
+		.test1{
+			/*line-height: 60px;*/
+			background: #f00;
+			height: 200px;
+			/*line-height: 90px;*/
+		}
+		.test1 img{
+			vertical-align: middle;
+		}
+		.test1 span{
+			/*vertical-align: text-bottom;*/
+			background: #f00;
+		}
+		.test1 strong{
+			/*line-height: 50px;*/
+			font-size:20px;
+			/*vertical-align: text-bottom;*/
+		}
+		.test2{
+			margin: 100px 0 0 0;
+		}
+		.test2{
+			height: 200px;
+		}
+		.test2 span{
+			background: #f00;
+			display: inline-block;
+			height: 200px;
+			width: 200px;
+		}
+		.button{display: inline-block;}
+		.dib-baseline {
+			display: inline-block; width: 150px; height: 150px;
+			border: 1px solid #cad5eb; background-color: #f0f3f9;
+		}
+	</style>
+</head>
+<body>
+<span class="dib-baseline" style="text-align: right;line-height: 50px;font-size: 50px;">bx我</span><span style="" class="dib-baseline">x-baseline</span>
+
+<div style="background: #0f0;overflow: hidden">
+	<span class="button" style="background: #f00;"></span>
+</div>
+
+<div class="test1">
+    <img src="test-1.png" style="vertical-align:middle;">
+	<span style="height: 100%;display: inline-block;width: 0px;vertical-align: middle"></span>
+</div>
+
+<div style="line-height:200px; border:1px solid #34538b;">
+	<span style="font-size:60px; border:1px solid #a0b3d6; vertical-align:text-top;">大大的文字</span>x后面是静止的文字。
+</div>
+
+<!--<div class="test2">-->
+<!--x-->
+	<!--<span class="span1">x对齐</span>-->
+	<!--<span class="span2"></span>-->
+<!--</div>-->
+</body>
+</html>

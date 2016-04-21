@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DOM Extension-contains方法</title>
+</head>
+<body>
+<div id="div-1">
+    <div id="title">
+        <h1 id="title-h1">标题</h1>
+        <span id="more">更多</span>
+    </div>
+</div>
+<div id="div-2">
+    <div id="content-wrapper">
+        <div id="block">
+            <p id="desc">这里是一段描述</p>
+            <img id="img" src=""/>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    var div2 = document.getElementById("div-2"),
+            div1 = document.getElementById("div-1"),
+            more = document.getElementById("more");
+    alert(div1.contains(more));
+    alert(div2.contains(more));
+//    alert(nodeContains(div1, more));
+//    alert(nodeContains(div2, more));
+    function nodeContains(node, childNode){
+        var result = false;
+        while(childNode != null){
+            if(childNode === node){
+                result = true;
+                break;
+            }
+            childNode = childNode.parentNode;
+        }
+        return result;
+    }
+</script>
+</body>
+</html>

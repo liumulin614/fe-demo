@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<div id="log"></div>
+<div>
+    <input type="button" id="button" value="点击一下"/>
+</div>
+<script type="text/javascript">
+    //
+    var count = 0;
+    function testPromise(){
+        var thisCount = ++count;
+        var log = document.getElementById("log");
+        log.insertAdjacentHTML("beforeend",thisCount+"同步代码开始<br/>");
+        var promise = new Promise(function(resolve, reject){
+            log.insertAdjacentHTML("beforeend",thisCount + "Promise代码开始<br/>");
+            window.setTimeout(function(){
+                resolve(thisCount);
+            }, Math.random() * 2000 + 1000);
+        })
+        promise.then(function(value){
+            log.insertAdjacentHTML("beforeend", thisCount + "Promise代码执行成功<br/>");
+        })
+    }
+//    testPromise();
+//    testPromise();
+//    testPromise();
+
+    //用promise封装XMLHttpRequest
+    function $http(url){
+        var core = {
+            ajax:function(method, url ,args){
+                var uri = url;
+                //先处理一下参数
+                if(args && (method.toLowerCase() == 'post' || method.toLowerCase() === 'put')){
+                    uri += "?";
+                    var argCount = 0;
+                    for(var key in args){
+                        if(args.hasOwnProperty(key)){
+                            if(argCount++){
+                                uri += "&";
+                            }
+                            uri += encodeURIComponent(key) + "=" + encodeURIComponent(args[key]);
+                        }
+                    }
+                }
+                var promise = new Promise(function(resolve, reject){
+                    var xhr = new XMLHttpRequest();
+                    xhr.onload = function(){
+                        if(this.status >= 200 && this.status < 300){
+                            resolve(this.responseText);
+                        }else{
+                            reject(this.responseText);
+                        }
+                    }
+                    xhr.onerror = function(e){
+                        reject(e.message);
+                    }
+                    xhr.open(method, uri, true);
+                    xhr.send();
+                })
+                return promise;
+            }
+        }
+        return {
+            "get":function(args){
+                return core.ajax("get",url,args);
+            },
+            "post":function(args){
+                return core.ajax("post", url , args);
+            }
+        }
+    }
+
+    var callback1 = {
+        success : function(data){
+            console.log(data);
+            var dataObj = JSON.parse(data),
+                    url = "http://localhost/fe/php/for-promise/list.php?id="+dataObj.id;
+            return $http(url).get("");
+        },
+        error : function(data){
+            console.log(2, 'error', data);
+        }
+    };
+    var callback2 = {
+        success:function(data){
+            console.log(data);
+        }
+    }
+
+
+
+    $http("http://localhost/fe/php/for-promise/id.php").get("")
+            .then(callback1.success, callback1.error)
+            .then(callback2.success, callback1.error);
+
+
+
+
+</script>
+</body>
+</html>

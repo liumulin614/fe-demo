@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>async attribute test</title>
+    <script src="/delayfile.php?url=http://localhost/js/load/async1.js&delay=2" async="async" type="text/javascript"></script>
+    <script>
+        alert("我是同步的脚本");
+    </script>
+</head>
+<body>
+</body>
+<script>
+    alert("我在底部");
+</script>
+</html>

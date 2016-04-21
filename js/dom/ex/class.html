@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DOM Extension-Class</title>
+    <style>
+        .red{color:#f00;}
+        .green{color:#0f0;}
+        .strong{font-weight: bolder;}
+        .normal{font-weight:normal;}
+        .bigger{font-size:20px;}
+        .smaller{font-size:14px;}
+    </style>
+</head>
+<body>
+<p class="strong">我是第一个段落</p>
+<p class="green strong bigger">我是较大的段落</p>
+<input id="name" type="text"/>
+<button type="button" id="button">测试</button>
+<div id="div" data-author="刘木林" data-uuid="123" data-age="23"></div>
+<!--<img src="http://localhost/delay.php"/>-->
+<script type="text/javascript">
+//    DOMTokenList.prototype.adds = function(classnames){
+//        var arr = classnames.split(/\s+/);
+//        arr.forEach(function(item){
+//            this.add(item);
+//        }.bind(this));
+//
+//    }
+//    var paragraphs = document.getElementsByClassName("strong")[0];
+//    var classList = paragraphs.classList;
+//    classList.adds("green");
+
+//    document.onreadystatechange = function(){
+//        alert(this.readyState);
+//    }
+
+    var div = document.getElementById("div");
+    var data = div.dataset;
+//    console.log(data.author);
+
+    alert(div.getAttribute("data-author"));
+
+
+
+
+</script>
+</body>
+</html>

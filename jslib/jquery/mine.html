@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript" src="mine.js"></script>
+<script type="text/javascript">
+
+
+    var pattern = /(([\w]+?)(,))/g;
+
+    var str = "a,b,c,";
+
+    console.log(str.match(pattern));
+
+    console.log(pattern.exec(str));
+
+
+    quickExpr = /^(?:[^#<]*(<[\w\W]+>)[^>]*|#([\w\-]*)$)/;
+    rsingleTag = /^<(\w+)\s*\/?>(?:<\/\1>)?$/;
+    console.log(rsingleTag.exec("div"));
+    console.log(quickExpr.exec("div"));
+
+    var mine = function(){this.a = 1;};
+    var m = new mine();
+
+
+
+    var mine = {};
+//    alert(mine.hasOwnProperty("constructor"))
+
+    mine[0] = "1";
+    mine[1] = "2";
+    mine.length = 3;
+
+    console.log(Array.prototype.slice.call(mine,0));
+
+    Array.prototype.push.call(mine,2,3);
+    console.log(mine);
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

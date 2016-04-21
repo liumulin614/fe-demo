@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="title" content="test2"/>
+    <title></title>
+</head>
+<body ng-app="myApp">
+<div ng-controller="GreetingCtroller">
+    {{name}}
+</div>
+<hr/>
+<div ng-controller="ListController">
+    <ol>
+        <li ng-repeat="name in names">
+            {{name}} is from {{department}}
+        </li>
+    </ol>
+</div>
+<script type="text/javascript" src="lib/angular.js"></script>
+<script type="text/javascript">
+    var app = angular.module("myApp",[]);
+    app.controller("GreetingCtroller",function($scope, $rootScope){
+        $scope.name = "我的名字";
+        $rootScope.department = "Department";
+    })
+
+    app.controller("ListController", function($scope){
+        $scope.names = ['sanmu','wumu'];
+    })
+
+
+</script>
+</body>
+</html>

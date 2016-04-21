@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'/>
+	<title>工厂模式</title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript" src="./util/interface.js"></script>
+<script type="text/javascript">
+/**
+ * 来自TOM大叔博客的一个迭代器，类似java中的Iterator的使用
+ */
+Array.prototype.iterator = function(){
+	var data = this;
+	index = 0,
+	length = data.length;
+	return {
+		next:function(){
+			return this.hasNext() ? data[index++] : null;
+		},
+		hasNext:function(){
+			return index < length;
+		},
+		rewind:function(){
+			index = 0;
+		},
+		current:function(){
+			return data[index];
+		}
+	}
+}
+
+var itr = [1,2,3,4,6,1,2].iterator();
+while(itr.hasNext()){
+	console.log(itr.next());
+}
+
+
+/**
+ * jQuery中的迭代器
+ */
+function each(obj, callback, args){
+	var name , i = 0, length = obj.length, isObj = length === undefined || typeof obj === "function";
+	alert(isObj);
+	if(args){
+		if(isObj){
+			for(name in obj){
+				if(callback.apply(obj[name], args) === false){
+					break;
+				}
+			}
+		}else{
+			for(;i < length;){
+				if(callback.apply(obj[i++],args) === false){
+					break;
+				}
+			}
+		}
+	}else{
+		if(isObj){
+			for(name in obj){
+				if(callback.call(obj[name], name, obj[name]) === false){
+					break;
+				}
+			}
+		}else{
+			for(;i < length;){
+				if(callback.call(obj[i],i, obj[i++]) === false){
+					break;
+				}
+			}
+		}
+	}
+}
+
+var array = [{a:3}, {b:4}];
+
+var obj = {a:4,b:5};
+
+each(obj , function(index, item){
+	console.log(index + ":" + item);
+})
+
+
+</script>
+</html>

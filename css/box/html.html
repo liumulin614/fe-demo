@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        body{margin:0;}
+        #test{display:block; bottom:3px; right:3px; width:130px; position:fixed;background: #f00;}
+        /* 以下是写给IE6的 */
+        * html body{height:100%; overflow-y:auto;}
+        * html #test{position:absolute; right:18px;}
+        * html{overflow-x:auto; overflow-y:hidden;}
+    </style>
+</head>
+<body>
+<div id="test">
+    dd
+</div>
+<div style="height:1000px">
+
+</div>
+
+</body>
+</html>

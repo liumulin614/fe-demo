@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+	<script type="text/javascript" src="http://static-web.smartjiangsu.com/bootstrap.js"></script>
+	<script src="1.js" defer="defer"></script>
+	<link rel="stylesheet" type="text/css" href="http://static-web.smartjiangsu.com/bootstrap1.css">
+	<link rel="stylesheet" type="text/css" href="http://static-web.smartjiangsu.com/bootstrap.css">
+</head>
+<body>
+
+<div id="test"></div>
+
+<img src="/delay.php">
+
+
+</body>
+
+
+<script src="http://static-web.smartjiangsu.com/jquery-1.9.1.js"></script>
+
+<script type="text/javascript">
+	
+	window.onload = function(){
+		$("#test").text("终于全部下载完了");
+		// setTimeout(function(){
+		// 	document.write("我的阿青");
+		// },1000);
+	}
+
+	$(document).ready(function(){
+		console.log("我不需要");
+		$("#test").text("我不需要");
+	});
+
+	// window.addEventListener("DOMContentLoaded",function(){
+	// 	alert("不需要啊");
+	// });
+</script>
+
+</html>

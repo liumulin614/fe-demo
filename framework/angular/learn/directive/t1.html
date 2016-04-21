@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html ng-app="directive">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script type="text/javascript" src="../lib/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("directive",[]);
+        app.controller("ctrl1", ["$scope",function($scope){
+        	$scope.loadData = function(){
+        		console.log("LoadData1111111111111---------");
+        	}
+        }])
+        app.controller("ctrl2", ["$scope", function($scope){
+        	$scope.loadData2 = function(){
+        		console.log("LoadData22222222222222----------");
+        	}
+        }])
+        app.directive("loader",function(){
+        	return {
+        		restrict:"AE",
+        		link:function(scope, element, attrs){
+        			element.bind("click",function(){
+        				scope.$apply(attrs.loaddata);
+        			})
+        		}
+        	}
+        })
+
+
+    </script>
+</head>
+<body>
+<div ng-controller="ctrl1">
+	<loader>点击这里1</loader>
+</div>
+<div ng-controller="ctrl2">
+	<loader loadData="loadData2()">点击这里2</loader>
+</div>
+</body>
+</html>

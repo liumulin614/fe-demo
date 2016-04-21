@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function test(){
+		try{
+			return i + 1;
+		}catch(e){
+			console.log(e.message);
+		}
+		
+	}
+
+	function Person(name){
+		this.name = name;
+
+		this.say = function(){
+			console.log("我的名师子"+name);
+			return this;
+		}
+		
+		this.yeild = function(){
+			console.log("我不想说我的名字");
+			return this;
+		}
+	}
+
+	var p1 = new Person("木林");
+	p1.say().yeild();
+
+	test();
+
+	alert(1+2);
+
+
+
+
+</script>
+</html>

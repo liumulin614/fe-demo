@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+	<div style="border: 1px solid #f00; padding: 40px;">
+		<!-- <input type="button" value="连接" name="connect" id="connect"/> -->
+
+	</div>
+
+	<div>
+		<input type="text" name="content" id="content"/>
+		<input type="button" id="sendBut" value="发送"/>
+	</div>
+
+</body>
+<script type="text/javascript" src="./socket.io-1.3.7.js"></script>
+<script type="text/javascript">
+	var socket = io.connect("http://localhost:8081");
+	socket.on("msg",function(data){
+		console.log(data);
+	});
+	var sendBut = document.getElementById("sendBut");
+	sendBut.onclick = sendMsg;
+	function sendMsg(){
+		var content = document.getElementById("content").value;
+		if(content){
+			socket.emit("msg",content);
+		}else{
+			alert("请输入聊天内容");	
+		}
+	}
+</script>
+</html>

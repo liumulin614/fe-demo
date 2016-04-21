@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM LEVEL 1 --Element</title>
+    <style>
+        .red{color:#f00;}
+        .green{color:#0f0;}
+        .strong{font-weight: bolder;}
+        .normal{font-weight:normal;}
+    </style>
+    <script>
+        document.write("<em>真的么</em>");
+    </script>
+</head>
+<body>
+
+<p author="刘木林" style="border: 1px solid #f00;margin: 10px;" id="p1" name="p1">我是一个段落</p>
+
+<script type="text/javascript">
+    function a(){
+
+    }
+    alert(typeof a);
+
+
+    //    alert(document.doctype.name);
+    var p1 = document.getElementsByTagName("p")[0];
+
+
+    var p1Text = p1.childNodes[0];
+
+    var p1Text2 = document.createTextNode("<strong>我的吧</strong>");
+    p1.appendChild(p1Text2);
+
+    p1Text.nodeValue  = "测试dd一下<strong>我的</strong>";
+
+
+
+    var attr = document.createAttribute("class");
+    attr.nodeValue = "strong";
+    p1.attributes.setNamedItem(attr);
+
+
+    var str = printAttributes(p1);
+    //    alert(str);
+
+    //    walkDomTree(document.documentElement);
+
+    function printAttributes(ele){
+        var attributes = ele.attributes,
+                i = 0, len = attributes.length,node,array =[];
+        for(; i < len ; i++){
+            node = attributes[i];
+            if(node.specified){
+                array.push(node.nodeName + "=" + node.nodeValue);
+            }
+        }
+        return array.join("&");
+    }
+
+    function walkDomTree(ele){
+        console.log("["+ele.nodeType +"]" + ele.nodeName +"：" + ele.nodeValue);
+        var childs = ele.childNodes, len = childs.length, i = 0;
+        if(len > 0){
+            for(;i < len; i++){
+                walkDomTree(childs[i]);
+            }
+        }
+    }
+
+
+
+
+
+</script>
+</body>
+
+</html>

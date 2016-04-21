@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>outline_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<style>
+body{font:14px 'Microsoft Yahei';}
+.test{width:100px;height:100px;padding:10px;margin:10px;border:1px solid #f00;}
+.top-margin{margin:20px 10px;width: 500px;}
+.top-inner-margin{border: none;height: 40px;}
+strong{margin:10px 50px;vertical-align: top;line-height: 3;}
+ins{vertical-align: middle;border: 1px solid #f00;}
+.inline-block-container{margin: 20px 0; border: 1px solid #f00;padding: 10px;}
+.inline-block-container span{display: inline-block;height: 200px;width: 200px;border-style: solid;}
+.absolute-container{width: 500px;margin: 10px auto;border: 1px solid #f00;height: 400px;padding: 20px;}
+.absolute-container img{float: left;vertical-align: top;width: 100px;}
+.absolute-container p{margin: 0px;clear: left;}
+.float-l{height: 300px;width: 300px;border: 1px solid #f00;float: left;}
+.clear{zoom:1;}
+.clear:after{content:'.';height: 0px;visibility: hidden;clear: both;display: block;}
+</style>
+</head>
+<body>
+<div class="test">注意边框线外面的红色轮廓</div>
+<div class="test top-margin">
+<div class="top-inner-margin">
+<strong>strong</strong><ins>ins</ins><del>del</del><span>span</span>
+</div>
+</div>
+
+<div class="inline-block-container clear">
+	<div class="float-l"></div>
+	<div class="float-l"></div>
+</div>
+
+<div class="absolute-container">
+ 	<img src="http://avatar.csdn.net/7/D/0/3_liumulinsp.jpg">
+ 	<p>
+		水井坊的了解水电费据了解水电费据了解少打飞机了少打飞机了水电费据了解少打飞
+		机了圣诞节福利塑料袋放假了水电费据了解数量多费劲的水立方多少斤咯手冻僵了
+		水电费据了解了涉及到法律三等奖几点睡了发生的几率受打击了
+	</p>
+</div>
+
+
+<div style="overflow: hidden">
+	<div style="padding: 10px;border: 1px solid #f00;">aaa</div>
+	<span style="margin:10px;border: 1px solid #f00;line-height: 30px;display: inline-block;">bb</span>
+	<div>ccc</div>
+</div>
+
+</body>
+</html>
+			

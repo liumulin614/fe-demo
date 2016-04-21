@@ -1,0 +1,1 @@
+test += "我是head外部AJAX脚本\n";

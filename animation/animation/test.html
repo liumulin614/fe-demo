@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.moving-block{
+			width: 100px;
+			height: 100px;
+			background-color: #000000;
+			position: absolute;
+			top: 50%;
+			left:-100px;
+			/*-webkit-animation: fly-in 2s ease-in 1s;*/
+		}
+
+		@-webkit-keyframes fly-in{
+			0%{-webkit-transform: translateX(0px);}
+			50%{-webkit-transform: translateX(-300px);}
+			100%{-webkit-transform: translateX(0px);}
+		}
+
+	</style>
+</head>
+<body>
+
+<div class="moving-block" id="moving-block">
+	
+
+</div>
+<script type="text/javascript">
+	var _ele = document.getElementById("moving-block");
+	var left = _ele.offsetLeft;
+
+	console.log(left);
+
+	var timer = setInterval(function(){
+		left = left < 0 ? left + 10 : 0;
+		_ele.style.left = left + "px";
+	},5);
+
+
+</script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>defer attribute test</title>
+	<script src="http://lib.sinaapp.com/js/jquery/1.9.1/jquery-1.9.1.min.js"></script>
+	<script type="text/javascript">var test = "";</script>
+    <script src="defer1.js" type="text/javascript" defer="defer"></script>
+	<script src="1.js" type="text/javascript"></script>
+	<script defer="defer">
+		test += "我是head延迟内部脚本\n";
+	</script>
+	<script>
+		test += "我是head内部脚本\n";
+	</script>
+</head>
+<body>
+<button id="test">点击一下</button>
+<script src="defer2.js" type="text/javascript" defer="defer"></script>
+<script src="2.js" type="text/javascript"></script>
+</body>
+<script src="defer3.js" type="text/javascript" defer="defer"></script>
+<script src="3.js" type="text/javascript"></script>
+<script>
+	$(function(){
+		test += "我是DOMContentLoaded里面的脚本\n";
+	})
+	window.onload = function(){
+		test += "我是window.onload里面的脚本\n";
+		var button = document.getElementById("test");
+		button.onclick = function(){
+			console.log(test);
+		}
+	}
+</script>
+</html>

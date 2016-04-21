@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+function leftpad(str, len, ch){
+	str = String(str);
+	var i = -1;
+	if(!ch && ch !== 0){
+		ch = " ";
+	}
+	len = len - str.length;
+	while(++i < len){
+		str = ch + str;
+	}
+	return str;
+}
+
+/**
+ * from 月影
+ * @param  {[type]} str [description]
+ * @param  {[type]} len [description]
+ * @param  {[type]} ch  [description]
+ * @return {[type]}     [description]
+ */
+function leftpad_with_array(str, len, ch){
+	str = "" + str;
+	len = len - str.length;
+	if(len <= 0){
+		return str;
+	}else{
+		return (new Array(len + 1).join(("" + ch) || " ")) + str;
+	}
+}
+/**
+ * 完全用Array的方法来实现
+ * @param  {[type]} str [description]
+ * @param  {[type]} len [description]
+ * @param  {[type]} ch  [description]
+ * @return {[type]}     [description]
+ */
+function leftpad_plain_array(str,len, ch){
+	return (new Array(len+1).join(("" + ch) || " ") + str).slice(-Math.max(len, str.length));
+}
+
+/**
+ * 借助ES6的repeat方法实现
+ * @param  {[type]} str [description]
+ * @param  {[type]} len [description]
+ * @param  {[type]} ch  [description]
+ * @return {[type]}     [description]
+ */
+function leftpad_repeat(str, len, ch){
+	str = "" + str;
+	var padlen = len - str.length, padch = ("" + ch) || " ";
+	if(padlen <= 0){
+		return str;
+	}else{
+		return padch.repeat(padlen) + str;
+	}
+}
+/**
+ * 用倍增的方法实现字符串连接操作
+ * @param  {[type]} str [description]
+ * @param  {[type]} len [description]
+ * @param  {[type]} ch  [description]
+ * @return {[type]}     [description]
+ */
+function leftpad_better(str, len, ch){
+	str ="" + str;
+	ch = ("" + ch) || " ";
+	var padlen = len - str.length;
+	if(padlen <= 0){
+		return str;
+	}
+	var padch = padlen & 1 ? ch : "";
+	while(padlen >>= 1){
+		ch += ch;
+		if(padlen & 1){
+			padch += ch;
+		}
+	}
+	return padch + str;
+}
+/**
+ * String.prototype.repeat的polyfill
+ */
+if(!String.prototype.repeat || typeof String.prototype.repeat != "function"){
+	String.prototype.repeat = function(count){
+		"use strict";
+		if(this === null){
+			throw new TypeError("cannot convert "+this+"to object");
+		}
+		var str = "" + this;
+		count = +count;
+		if(count != count){
+			count = 0;
+		}
+		if(count < 0){
+			throw new RangeError();
+		}
+		if(count == Infinity){
+			throw new RangeError();
+		}
+		if(str === "" || count === 0){
+			return str;
+		}
+		if(str.length * count >= 1 << 28){
+			throw new RangeError("repeat count must not overflow maximum string size");
+		}
+		var rpt = "";
+		for(;;){
+			if((count & 1) === 1){
+				rpt += str;
+			}
+			count >>>= 1;
+			if(count === 0){
+				break;
+			}
+			str += str;
+		}
+		return rpt;
+	}
+}
+
+
+
+
+var str = "tr", ch = "我",len = 8;
+console.log(leftpad(str, len, ch));
+console.log(leftpad_with_array(str, len, ch));
+console.log(leftpad_plain_array(str, len, ch));
+console.log(leftpad_repeat(str, len, ch));
+console.log(leftpad_better(str, len, ch));
+
+</script>
+</html>

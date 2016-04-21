@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title>defer bug in IE=9 test</title>
+	<!--<script src="1.js" type="text/javascript" defer="defer"></script>-->
+	<!--<script src="2.js" type="text/javascript" defer="defer"></script>-->
+</head>
+<img src="http://localhost/delay.php"/>
+<body>
+<script>
+	window.addEventListener("DOMContentLoaded",function(){
+		alert("d");
+	})
+</script>
+</body>
+</html>

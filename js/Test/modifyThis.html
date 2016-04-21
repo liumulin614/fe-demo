@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		.drag{position: relative;}
+	</style>
+</head>
+<body>
+	<div id="div1" style="width: 200px;height: 50px;text-align: center;line-height: 50px;position:absolute;top: 50%;left: 50%;margin-top: -25px;margin-left: -100px;" onclick="javascript:this.style.color='#fff';this.style.backgroundColor='#000'">
+		颜海镜
+	</div>
+
+	<div id="wrapper">
+		<p id="p">
+			<div>
+				<div class="drag" id="drag">
+					<div>
+						<div id="san"></div>
+					</div>
+					<div>
+					<div>
+						<div id="san1"></div>
+					</div>
+					</div>
+				</div>
+			</div>
+		</p>
+	</div>
+</body>
+<script type="text/javascript" src="http://lib.sinaapp.com/js/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript">
+
+	function commonParentNodeT(oNode1, oNode2) {
+		if(oNode1.contains(oNode2)){
+			return oNode1;
+		}else{
+			return arguments.callee(oNode1.parentNode,oNode2);
+		}
+	}
+
+	function commonParentNodeM(oNode1, oNode2){
+		while(!oNode1.contains(oNode2)){
+			oNode1 = oNode1.parentNode;
+		}
+		return oNode1;
+	}
+
+	function commonParentNode(oNode1, oNode2) {
+		if(oNode1.parentNode == oNode2.parentNode){
+			return oNode1.parentNode;
+		}else if(oNode1 == oNode2.parentNode){
+			return oNode1;
+		}else if(oNode1.parentNode == oNode2){
+			return oNode2;
+		}else{
+			// console.log(getNowLevel(oNode1));
+			// console.log(getNowLevel(oNode2));
+			if( getNowLevel(oNode1) > getNowLevel(oNode2)){
+				return commonParentNode(oNode1.parentNode, oNode2);
+			}else{
+				return commonParentNode(oNode1, oNode2.parentNode);
+			}
+		}
+	}
+
+
+	function getNowLevel(oNode1){
+		var i = 0,node = oNode1;
+		while(node.nodeName != '#document'){
+			// console.log(node.nodeName);
+			i++;
+			node = node.parentNode;
+		}
+		return i;
+	}
+
+	var div1 = document.getElementById("div1");
+	var wrapper = document.getElementById("wrapper");
+	var p = document.getElementById("p");
+	var san = document.getElementById("san");
+	var san1 = document.getElementById("san1");
+	var drag = document.getElementById("drag");
+
+
+	console.log();
+	// console.log(getNowLevel(drag));
+
+	console.log(commonParentNodeM(san,san1));
+	console.log(commonParentNodeT(drag,san));
+
+</script>
+</html>

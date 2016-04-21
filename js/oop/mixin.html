@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+/**
+ * Mixin Object
+ */
+/**
+ * Simple Version
+ */
+function mixinSimple(target,src){
+	for(var i in src){
+		if(!target[i]){
+			target[i] = src[i];
+		}
+	}
+}
+var person = {name: 'John', age: 29}
+var obj = {name: 'Jack'}
+mixinSimple(obj, person);
+console.log(obj);
+
+/**
+ * One more sources Version
+ */
+function mixin(target){
+	
+	var sources = Array.prototype.slice.call(arguments,1);
+	for(var i = 0; i < sources.length ; i++){
+		var src = sources[i];
+		for(var k in src){
+			if(!target[k]){
+				target[k] = src[k];
+			}
+		}
+	}
+}
+var person = {name: 'John', age: 29, toString: function(){return 'aa'}}
+var permission = {open: 1}
+var obj = {name: 'Jack'}
+mixin(obj, person, permission)
+console.log(obj);
+</script>
+</html>

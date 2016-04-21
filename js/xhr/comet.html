@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+<div id="text"></div>
+
+</body>
+<script type="text/javascript">
+	
+	var div = document.getElementById("text");
+
+	var client = createStreamingRequest("http://localhost/weixin/comet.php",function(data){
+		alert("这次的数据为:"+data+"<br/>");
+	},function(allData){
+		div.innerHTML = "全部的数据为"+allData;
+	});
+
+
+	//采用http流的方式获取服务器返回的数据
+	function createStreamingRequest(url,process,finished){
+		var xhr = new XMLHttpRequest(),
+				received = 0;
+		xhr.onreadystatechange = function(){
+			var result;
+			//readyState
+			if(xhr.readyState == 3){
+				//只取得最新的数据
+				result = xhr.responseText.substring(received);
+				received += result.length;
+				console.log(result);
+				process(result);
+			}else if(xhr.readyState == 4){
+				finished(xhr.responseText);
+			}
+		};
+		xhr.open("get",url,true);
+		xhr.send(null);
+		return xhr;
+	}
+
+
+
+
+</script>
+</html>

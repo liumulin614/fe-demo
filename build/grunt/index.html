@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8"/>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+	var Function = function(){};
+
+	function test(){
+		alert("i");
+	}
+	Array.__proto__ = 1;
+
+	console.log(Array.__proto__ == Function.__proto__);
+
+	console.log(Array.__proto__.__proto__);
+
+	
+
+	// console.log(F.prototype);
+
+	// Object.prototype.a = function(){};
+
+	// console.log(F.a);
+
+	// var f = new F();
+
+
+	// F.prototype.b = function(){};
+
+	// console.log(f.b);
+
+
+
+</script>
+</html>

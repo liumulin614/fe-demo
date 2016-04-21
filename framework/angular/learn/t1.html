@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="lib/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module('myApp', []);
+        app.controller("HelloAngular", function($scope){
+            $scope.greeting = {
+                text:"您好"
+            }
+        })
+        app.directive("hello",function(){
+            return {
+                restrict:"E",
+                template:"<div>我是替换的指令奥</div>",
+                replace:true
+            }
+        })
+        //    function HelloAngular($scope){
+        //        $scope.greeting = {
+        //            text:"您好"
+        //        }
+        //    }
+    </script>
+</head>
+<body>
+<div ng-app="myApp" ng-controller="HelloAngular">
+    <h1>
+        {{greeting.text}},angular
+    </h1>
+    <hello></hello>
+
+    <input ng-model="greeting.hello"/>
+    看这里：{{greeting.hello}}
+</div>
+
+</body>
+
+
+</html>

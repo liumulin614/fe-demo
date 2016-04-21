@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='UTF-8'/>
+	<title></title>
+</head>
+<body>
+
+	<div id="test">点击一下下下</div>
+
+	<a id="a-test" href="http://www.baidu.com">看一下链接</a>
+	
+	<button class="ui-btn-lg" onclick="location.reload();">
+        再来一次
+    </button>
+
+</body>
+<script type="text/javascript">
+
+
+       window.addEventListener("beforeunload",function(event){
+	   return "dd";
+			event.returnValue = "dd112";
+		},true)
+	
+	var eventBinder = {
+		addEventListener:function(element,type,handler,useCapture){
+			if(element.addEventListener){
+				element.addEventListener(type,handler,useCapture);
+			}else if(element.attachEvent){
+				element.attachEvent("on"+type,handler);
+			}else{
+				element['on'+type] = handler;
+			}
+		}
+	};
+	   eventBinder.addEventListener(document.body, "click",function(){
+		   alert("我是body点击了");
+	   },true)
+	   var ele = document.getElementById("test");
+
+	eventBinder.addEventListener(ele,"click",function(e){
+		alert("我是捕获的");
+	},true);
+
+	   eventBinder.addEventListener(ele, "click", function(e){
+		   alert("我是冒泡的");
+	   }, false);
+
+
+
+
+	var link = document.getElementById("a-test");
+	eventBinder.addEventListener(link,"click",function(e){
+		alert(e);
+		link.style.color = '#f00';
+	});
+
+//	var str = new String("等等");
+//	alert(str instanceof Object);
+
+
+
+</script>
+</html>

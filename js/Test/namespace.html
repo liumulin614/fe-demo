@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	function namespace(oNamespace, sPackage) {
+    	var packages,nowObj,i;
+    	packages = sPackage.split(".");
+    	nowObj = oNamespace;
+    	for(i = 0 ; i < packages.length; i++){
+    		var key = packages[i];
+    		if(!nowObj[key] || typeof nowObj[key]!=="object"){
+    			nowObj[key] = {};
+    		}
+    		nowObj = nowObj[key];
+    	}
+    	return JSON.stringify(oNamespace);
+	}
+
+	console.log(namespace({a: {test: 1, b: 2}}, 'a.b.c.d'));
+
+	var arr = [1,2,3];
+	alert(arr.indexOf(2));
+
+
+
+</script>
+</html>

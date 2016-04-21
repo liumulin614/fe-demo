@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+
+
+
+	function formatDate(oDate, sFormation) {
+		var year = oDate.getFullYear();
+   	 	var month = oDate.getMonth();
+    	var day = oDate.getDate();
+    	var weekDay = oDate.getDay();
+    	var hour = oDate.getHours();
+    	var minute = oDate.getMinutes();
+    	var seconds = oDate.getSeconds(); 
+		var arr = ['日', '一', '二', '三', '四', '五', '六'];
+   		return sFormation.replace(/(y|Y|M|m|H|h|d|s|w)+/g,function(match){
+        	var targetValue;
+        	switch(match){
+        		case 'yyyy':
+        			targetValue = year;
+        			break;
+        		case 'yy':
+        			targetValue = String(year).substring(2);
+        			break;
+        		case 'M':
+        			targetValue = month + 1;
+        			break;
+        		case 'MM':
+        			targetValue = month >=9 ? month +1 : ('0'+(month+1));
+        			break;
+        		case 'd':
+        			targetValue = day;
+        			break;
+        		case 'dd':
+        			targetValue = day > 9 ? day : '0'+day;
+        			break;
+        		case 'H':
+        			targetValue = hour;
+        			break;
+        		case 'HH':
+        			targetValue = hour > 9 ? hour : '0'+hour;
+        			break;
+        		case 'h':
+        			targetValue = hour > 12 ? hour - 12 : hour;
+        			break;
+        		case 'hh':
+        			targetValue = hour-12 > 9 ? hour - 12 : ("0"+(hour-12));
+        			break;	
+        		case 'm':
+        			targetValue = minute;
+        			break;
+        		case 'mm':
+        			targetValue = minute > 9 ? minute : '0'+minute;
+        			break;
+        		case 's':
+        			targetValue = seconds;
+        			break;
+        		case 'ss':
+        			targetValue = seconds > 9 ? seconds : '0'+seconds;
+        			break;
+        		case 'w':
+        			targetValue = arr[weekDay];
+        			break;
+        		default:
+        			targetValue = 'format error';
+        		
+        	}
+        	return targetValue;
+    	}) ;
+
+
+	}
+
+	console.log(formatDate(new Date(1409894060000), 'yyyy-MM-d hh:mm:ss 星期w'));
+console.log(formatDateT(new Date(1409894060000), 'yy-MM-dd H:mm:ss 星期w'));
+
+
+
+function formatDateT(oDate, sFormation) {
+      var _y = oDate.getFullYear();
+      var _m = oDate.getMonth()+1;
+      var _d = oDate.getDate();
+      var _w = oDate.getDay(); 
+      var _h = oDate.getHours();
+      var _mi= oDate.getMinutes();
+      var _s = oDate.getSeconds();
+      var arr = ['日', '一', '二', '三', '四', '五', '六'];
+      var res = sFormation.replace(
+                /((y|M|d|H|h|m|s|w)+)/g,
+                function(a,i,index,obj){
+ 
+                    switch(i){
+                        case 'yyyy':    i=_y;       break;
+                        case 'M':       i=_m;       break;
+                        case 'd':       i=_d;       break;
+                        case 'H':       i=_h;       break;
+                        case 'm':       i=_mi;      break;
+                        case 's':       i=_s;       break;
+                        case 'w':       i=arr[_w];      break;
+ 
+                        case 'yy': i=(_y+'').slice(2); break;
+                        case 'MM': i= _m < 10 ? '0'+_m : _m; break;
+                        case 'dd': i= _d < 10 ? '0'+_d : _d; break;
+                        case 'HH': i= _h < 10 ? '0'+_h : _h; break;
+                        case 'h': i= _h > 12 ? _h-12 : _h; break;
+                        case 'hh':
+                            if(_h > 12){
+                                i=_h-12<10 ? '0'+(_h-12) : _h;
+                            }else{
+                                i=_h<10 ? '0'+_h : _h;
+                            } 
+                            break;  //待测
+                        case 'mm': i= _mi < 10 ? '0'+_mi : _mi; break;
+                        case 'ss': i= _s < 10 ? '0'+_s : _s; break;
+ 
+                        default:
+                            i= 'error！';   
+                    }              
+                    return i;                  
+                }
+            );
+      return res;
+}
+
+
+
+
+function rgb2hex(sRGB) {
+ 	   var result = sRGB;
+ 	   sRGB.replace(/^rgb\((\d+)\, *(\d+)\, *(\d+)\)$/g,function(match,r,g,b){
+ 	   		var rValue = calHex(r);
+ 	   		var gValue = calHex(g);
+ 	   		var bValue = calHex(b);
+ 	   		if(rValue && gValue && bValue){
+ 	   			result = "#" + Number(r).toString(16) + gValue + bValue;
+ 	   		}
+ 	   });
+ 	   return result;
+}
+
+function calHex(num){
+	if(num < 0 || num > 255){
+		return "";
+	}
+	var hign = getHexNum(parseInt(num / 16));
+	var low = getHexNum(num % 16);
+	return hign+low;
+}
+
+function getHexNum(num){
+	var hexNum;
+	switch(num){
+		case 15:
+			hexNum = 'f';
+			break;
+		case 14:
+			hexNum = 'e';
+			break;
+		case 13:
+			hexNum = 'd';
+			break;
+		case 12:
+			hexNum = 'c';
+			break;
+		case 11:
+			hexNum = 'b';
+			break;
+		case 10:
+			hexNum = 'a';
+			break;
+		default:
+			hexNum = num+"";
+	}
+	return hexNum;
+}
+
+// console.log(rgb2hex('rgb(255, 255, 255)'));
+// console.log(rgb2hex('rgb(255,  255,  255)'));
+
+function count(str) {
+	var result = {};
+	str = str.replace(/ /g,"");
+	for(var i = 0 ; i < str.length; i++){
+		if(str[i] in result){
+			result[str[i]] ++;
+		}else{
+			result[str[i]] = 1;
+		}
+	}
+	return result;
+}
+console.log(count('hello world'));
+</script>
+
+
+</html>

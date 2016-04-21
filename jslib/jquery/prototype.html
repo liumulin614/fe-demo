@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jquery prototype</title>
+</head>
+<body>
+<div class="div">
+    <h1>标题</h1>
+    <p>圣诞节福利少打飞机了的谁减肥了少打飞机了少打飞机了</p>
+</div>
+<div>
+
+</div>
+<div>
+
+</div>
+<script type="text/javascript" src="1.7.1/jquery-1.7.1.js"></script>
+<script type="text/javascript">
+    /**
+     * jQuery中的each
+     */
+    function each(obj, callback, args){
+        var name , i = 0, length = obj.length, isObj = length === undefined || typeof obj === "function";
+        alert(isObj);
+        if(args){
+            if(isObj){
+                for(name in obj){
+                    if(callback.apply(obj[name], args) === false){
+                        break;
+                    }
+                }
+            }else{
+                for(;i < length;){
+                    if(callback.apply(obj[i++],args) === false){
+                        break;
+                    }
+                }
+            }
+        }else{
+            if(isObj){
+                for(name in obj){
+                    if(callback.call(obj[name], name, obj[name]) === false){
+                        break;
+                    }
+                }
+            }else{
+                for(;i < length;){
+                    if(callback.call(obj[i],i, obj[i++]) === false){
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    /**
+     * jQuery中的map
+     */
+    function map(elems , callback, arg){
+         var name, i = 0, length = elems.length, value, ret = [];
+        var isArray = elems instanceof jQuery || length !== undefined && typeof length === "number" && ((length > 0 && elems[0] && elems[length -1])
+                        || length === 0 || jQuery.isArray(elems));
+        if(isArray){
+            for(; i < length ;){
+                value = callback(elems[i++], i, arg);
+                if(value != null){
+                    ret[ret.length] = value;
+                }
+            }
+        }else{
+            for(name in elems){
+                value = callback(elems[name], name, arg);
+                if(value != null){
+                    ret[name] = value;
+                }
+            }
+        }
+        return ret.concat.apply([], ret);
+    }
+
+
+    var array = [1,2,3,4];
+    var obj = {a:1,b:3};
+
+    var ret = map(obj, function(item, index){
+        console.log(item);
+        return item * 2;
+    })
+
+    console.log(ret);
+
+</script>
+</body>
+</html>

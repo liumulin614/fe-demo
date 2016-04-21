@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DOM STYLE</title>
+    <link type="text/css" rel="stylesheet" href="http://www.zghuide.com/assets/css/common/test.css"/>
+    <link type="text/css" rel="stylesheet" href="css/style.css"/>
+    <link type="text/css" rel="alternate stylesheet" href="css/style.css"/>
+    <style>
+        #div{
+            border:10px solid #0f0;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="div" style="color: #f00;">
+    wo wo
+</div>
+
+<script type="text/javascript">
+    var styleSheetUtil = {
+        getStylesheet:function(ele){
+            return ele.sheet || ele.styleSheet;
+        },
+        getRules : function(stylesheet){
+            return stylesheet.cssRules || stylesheet.rules;
+        }
+    }
+   var div = document.getElementById("div");
+   var computedStyle = computedStyle(div);
+
+   var links = document.getElementsByTagName("link");
+   var styleSHeet = styleSheetUtil.getStylesheet(links[1]);
+    var rules  = styleSheetUtil.getRules(styleSHeet);
+    var rule = rules[0];
+    addRule(styleSHeet, "#div","background-color:#00f;",0);
+
+
+    function traversalStyle(style){
+        var i = 0, len = style.length, item,value,text="";
+        for(; i < len ; i++){
+            item = style[i];
+            value = style.getPropertyValue(item);
+            text += item + ":" + value+";";
+        }
+        return text.substring(0, text.length-1);
+    }
+
+    function computedStyle(ele, pseudo){
+        if(ele.nodeType != 1){
+            throw new Error("parameter expected to be a HTMLElement");
+        }
+        return ele.currentStyle || document.defaultView.getComputedStyle(ele,pseudo);
+    }
+
+    function traversalStylesheets(){
+        var i = 0, stylesheets = document.styleSheets,len = stylesheets.length, item;
+        for(; i < len; i++){
+            item = stylesheets[i];
+            alert(item.href);
+        }
+    }
+
+    function addRule(styleSheet, selectorText, cssText, position){
+        if(styleSheet.insertRule){
+            styleSheet.insertRule(selectorText+"{"+cssText +"}",position);
+        }else if(styleSheet.addRule){
+            styleSheet.addRule(selectorText, cssText, position);
+        }
+    }
+
+</script>
+</body>
+</html>

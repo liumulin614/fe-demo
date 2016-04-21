@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+/**
+ * 在这里对JavaScript中常用的继承方法进行总结
+ */
+
+/**
+ * clone函数，用于原型式继承：一个浅复制
+ * @param  {[type]} object [description]
+ * @return {[type]}        [description]
+ */
+function clone(object){
+	function F(){};
+	F.prototype = object;
+	return new F();
+}
+/**
+ * 封装原型链继承的代码
+ * @return {[type]} [description]
+ */
+function extend(subClass, superClass){
+	var proto = clone(superClass.prototype);
+	subClass.prototype = proto;
+	subClass.prototype.constructor = subClass;
+	
+}
+function extendMore(subClass,superClass){
+	extend(subClass,superClass);
+	//这几句进一步解耦，使得子类构造函数中无须出现父类构造函数的名称
+	subClass.superclass = superClass.prototype;
+	if(superClass.prototype.constructor === Object.prototype.constructor){
+		superClass.prototype.constructor = superClass;
+	}
+}
+
+/**
+ * 父类
+ * @param {[type]} brand [description]
+ */
+function Vehicle(brand){
+	this.brand = brand;
+}
+Vehicle.prototype.sayBrand = function(){
+	console.log(this.brand);
+}
+/**
+ * 1、组合式继承
+ * 缺点：父类的构造函数需要调用两次
+ */
+function Bike(brand,speed){
+	Vehicle.call(this,brand);
+	this.speed = speed;
+}
+Bike.prototype = new Vehicle();
+Bike.prototype.move = function(){
+	console.log("自行车的速度:"+this.speed +"KM/H");
+}
+var bike = new Bike("金鹿",7);
+bike.sayBrand();
+bike.move();
+/**
+ * 2、寄生组合式继承
+ */
+function Motor(brand,speed){
+	Vehicle.call(this,brand);
+	this.speed = speed;
+}
+extend(Motor,Vehicle);
+Motor.prototype.move = function(){
+	console.log("摩托车的速度:"+this.speed+"KM/H");
+}
+var motor = new Motor("雅马哈","40");
+motor.sayBrand();
+motor.move();
+/**
+ * 3、进一步解耦的寄生式组合继承
+ */
+function Car(brand,speed){
+	Car.superclass.constructor.call(this,brand);
+	this.speed = speed;
+}
+extendMore(Car,Vehicle);
+Car.prototype.move = function(){
+	console.log("小轿车的速度:" + this.speed + "KM/H");
+}
+
+var car = new Car("奔驰",141);
+car.sayBrand();
+car.move();
+
+
+
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>DOM Extension-Selector API</title>
+</head>
+<body>
+<div class="wrapper" id="wrapper">
+    <div class="logo">我是logo</div>
+    <ul>
+        <li>第一个列表元素</li>
+        <li>第二个元素</li>
+        <li class="third-li">第三个元素</li>
+    </ul>
+    <p class="para">这里是一个段落</p>
+</div>
+<script type="text/javascript">
+//    var lis = document.querySelectorAll(".wrapper li:nth-child(1)");
+//    var li = lis.item(0);
+//
+//    var ul = document.querySelector("ul");
+//    alert(ul.childNodes.length);
+
+    var ul =  document.getElementsByTagName("ul")[0];
+
+traversalNewVersion(ul);
+
+    function traversal(element){
+        var childNodes = element.childNodes,i = 0, len = childNodes.length, item;
+        for(; i < len ; i++){
+            item = childNodes.item([i]);
+            if(item.nodeType === 1){
+                console.log(item.nodeName + ":" + item.innerHTML);
+            }
+        }
+    }
+
+    function traversalNewVersion(element){
+        var len = element.childElementCount, child = element.firstElementChild;
+        while(true){
+            console.log(child.nodeName + ":" + child.innerHTML);
+            if(child === element.lastElementChild){
+                break;
+            }
+            child = child.nextElementSibling;
+        }
+    }
+
+
+
+</script>
+</body>
+</html>

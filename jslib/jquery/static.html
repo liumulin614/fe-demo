@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>jQquery static property</title>
+</head>
+<body>
+<section>section1</section>
+<section>section2</section>
+<script type="text/javascript" src="1.7.1/jquery-1.7.1.js"></script>
+<script type="text/javascript">
+
+    console.log(navigator.userAgent);
+    for(var i in $.browser){
+        console.log(i+":"+ $.browser[i]);
+    }
+//    console.log($.browser);
+//    console.log($.browser.browser);
+//    console.log($.browser.version);
+    function parseJSON(data){
+        if(typeof data !== "string" || data == null){
+            return null;
+        }
+        data = data.trim();
+//        if(window.JSON && window.JSON.parse){
+//            return JSON.parse(data);
+//        }
+        return new Function("return " + data)();
+    }
+
+    function globalEval(data){
+        if(data && /\S/.test(data)){
+            (window.execScript || function(data){
+                window.eval.call(window, data);
+            })(data)
+        }
+    }
+
+    function makArray(){
+
+    }
+
+    //grep测试
+    function grep(elems, callback ,inv){
+        var ret = [], retVal;
+        inv = !!inv;
+        for(var i = 0 ; i < elems.length; i++){
+            retVal = !!callback(elems[i], i);
+            if(retVal !== inv){
+                ret.push(elems[i]);
+            }
+        }
+        return ret;
+    }
+    var numbers = [1,2,3,4,5,6];
+
+    var grepResult = $.grep(numbers, function(item, index){
+        if(item & 1){
+            return true;
+        }
+    })
+
+    grepResult = grep(numbers, function(item, index){
+        if(!(item & 1)){
+            return true;
+        }
+    })
+//    console.log(grepResult);
+    //gerp测试结束
+
+    //proxy测试
+    var handler = {
+        name:"han",
+        test:function(a){
+            alert(this.name);
+            console.log(arguments);
+        }
+    }
+   var func = $.proxy(handler.test,handler);
+
+//    setTimeout(func, 2000);
+    //proxy测试结束
+
+    //access测试
+    function access(){
+    }
+
+    $("section").attr("class","section");
+
+
+//    func("bbb");
+
+//    setTimeout(handler.test.bind(handler, "aaa"), 3000);
+
+
+
+    var str = "alert(3);console.log(this);";
+
+    var a = {
+        test:function(){
+            globalEval(str);
+        }
+    }
+
+//    a.test();
+
+//    var str = "{\"a\":\"b\"}";
+//    console.log(parseJSON(str));
+//    console.log($.parseJSON(str));
+//
+//    alert(/\S/.test("s "));
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+<script type="text/javascript">
+    console.log(Object.prototype.toString.call([1,2]))
+    var worker = new Worker("worker1.js");
+    worker.postMessage([1,2,4,12,56,9,19,0,98]);
+    worker.onmessage = function(event){
+        console.log(event.data);
+    }
+
+    worker.onerror = function(error){
+        console.log(error);
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!DOCTYPE HTML>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+    </style>
+</head>
+<body>
+<div id="div">我是住文档的啦</div>
+<iframe src="iframe.html" style="width: 100%;min-height: 200px;border: 2px solid #f00;">
+</iframe>
+<script type="text/javascript">
+//    var div1= document.getElementById("div1");
+//    alert(div1);
+window.onload = function(){
+    var doc1 = window.frames[0].document;
+    var div1 = doc1.getElementById("div1"),
+            div = document.getElementById("div");
+    var divClone = div.cloneNode(true),
+            div1Clone = div1.cloneNode(true),
+            div1Import = document.importNode(div, true);
+    var doc = document.implementation.createHTMLDocument("我我");
+    alert(doc);
+}
+
+window.onload = null;
+
+var div = document.getElementById("div");
+alert(document.body.isSupported("core",3.0));
+
+
+
+
+    function getDoctype(){
+        var docType = document.doctype,childNodes, i, len, item, nodeType, nodeValue;
+        if(!docType){
+            childNodes = document.childNodes;
+            for(i = 0, len = childNodes.length; i < len ; i++){
+                item = childNodes[i];
+                nodeType = item.nodeType;
+                nodeValue = item.nodeValue;
+                if(item.nodeType == 10 || (nodeType == 8 && nodeValue.toUpperCase().indexOf("DOCTYPE") > -1)){
+                    docType = item;
+                    break;
+                }
+            }
+        }
+        return docType || {};
+    }
+
+    function getDefaultView(document){
+        if(!document){
+            throw new TypeError("Function expected one parameter,but none parameter in fact");
+        }
+        return document.defaultView || document.parentWindow;
+    }
+</script>
+</body>
+</html>

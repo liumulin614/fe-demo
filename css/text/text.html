@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="utf-8" />
+<title>writing-mode_CSS参考手册_web前端开发参考手册系列</title>
+<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+<style>
+.test{width:100px;height:100px;margin:10px;border:1px solid #aaa;}
+.lr-tb{-webkit-writing-mode:horizontal-tb;writing-mode:lr-tb;writing-mode:horizontal-tb;}
+.tb-rl{-webkit-writing-mode:vertical-rl;writing-mode:tb-rl;}
+.tb-lr{-webkit-writing-mode:vertical-lr;writing-mode:tb-rl;writing-mode:vertical-lr;}
+</style>
+</head>
+<body>
+<div class="test tb-rl">
+<p class="test">本段文字将按照水平从左到右的书写方向进行流动。</p>
+</div>
+<div class="test tb-rl">本段文字将按照垂直从右到左的书写方向进行流动。</div>
+<div class="test tb-lr">本段文字将按照垂直从左到右的书写方向进行流动。</div>
+<ul class="tb-rl">
+	<li class="test">本段文字将按照垂直从右到左的书写方向进行流动。</li>
+	<li class="test">本段文字将按照垂直从右到左的书写方向进行流动。</li>
+</ul>
+<ul class="tb-lr">
+	<li class="test">本段文字将按照垂直从左到右的书写方向进行流动。</li>
+	<li class="test">本段文字将按照垂直从左到右的书写方向进行流动。</li>
+</ul>
+</body>
+<script type="text/javascript">
+var tool={};
+var test=function(){
+	return 1;
+}
+alert(test());
+	tool.dateFormat=function(date,fmt){
+  var o = { 
+    "M+" : date.getMonth()+1,                 //月份 
+    "d+" : date.getDate(),                    //日 
+    "h+" : date.getHours(),                   //小时 
+    "m+" : date.getMinutes(),                 //分 
+    "s+" : date.getSeconds(),                 //秒 
+    "q+" : Math.floor((date.getMonth()+3)/3), //季度 
+    "S"  : date.getMilliseconds()             //毫秒 
+  }; 
+  if(/(y+)/.test(fmt)) 
+    fmt=fmt.replace(RegExp.$1, (date.getFullYear()+"").substr(4 - RegExp.$1.length)); 
+  for(var k in o) 
+    if(new RegExp("("+ k +")").test(fmt)) 
+  fmt = fmt.replace(RegExp.$1, (RegExp.$1.length==1) ? (o[k]) : (("00"+ o[k]).substr((""+ o[k]).length))); 
+  return fmt; 
+}
+alert(tool.dateFormat(new Date(),"yyyy年M月d日"));
+</script>
+</html>
+			

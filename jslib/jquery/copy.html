@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+<script type="text/javascript" src="1.7.1/jquery-1.7.1.js"></script>
+<script type="text/javascript">
+
+
+
+    var util = (function(){
+        var class2type = {};
+        ["Null","Undefined","Number","Boolean","String","Object","Function","Array","RegExp","Date"].forEach(function(item){
+            class2type["[object "+ item + "]"] = item.toLowerCase();
+        })
+
+        function isType(obj, type){
+            return getType(obj) === type;
+        }
+        function getType(obj){
+            return class2type[Object.prototype.toString.call(obj)] || "object";
+        }
+        return {
+            isType:isType,
+            getType:getType
+        }
+    })();
+
+
+
+
+
+    var a = {
+        name:"a",
+        arry:[1,2,4],
+        get:function(){
+            return this.name;
+        },
+        parent:{
+            name:"我是父类"
+        }
+    }
+
+
+
+
+//    var b = JSON.parse(JSON.stringify(a));
+    var b = copy(a);
+    var c = cloneObject(a);
+    console.log(c);
+    console.log(b);
+    b.parent.name = "b的父类";
+    b.pattern = /^$/g;
+    b.date = new Date(1991,10,12);
+    console.log(a.parent.name);
+    console.log(a.pattern);
+    console.log(a.date);
+
+//    console.log(b.pattern);
+
+
+
+
+
+
+//    var b = copy(a);
+//    var c = copyWithTrick(a);
+//    b.parent.name = "b";
+//    c.parent.name = "c";
+//    //属性是一个纯粹对象
+//    console.log(a.parent.name);
+//    console.log(b.parent.name);
+//    console.log(c.parent.name);
+
+//
+//    var b = {
+//        name:"b"
+//    };
+//
+//    $.extend(true, a, b);
+////    console.log(a);
+//    b.name = "我我";
+////    b.parent.name = "变化老";
+//    console.log(a.name);
+//    console.log(a.parent.name);
+
+
+
+    function copy(obj,deep){
+        if(obj === null || typeof obj !== "object"){
+            return obj;
+        }
+        var i, target = util.isType(obj,"array") ? [] : {},value,valueType;
+        for(i in obj){
+            value = obj[i];
+            valueType = util.getType(value);
+            if(deep && (valueType === "array" || valueType === "object")){
+                target[i] = copy(value);
+            }else{
+                target[i] = value;
+            }
+        }
+        return target;
+    }
+
+    function cloneObject(obj) {
+        if (obj === null || typeof obj !== 'object') {
+            return obj;
+        }
+
+        var temp = obj.constructor(); // give temp the original obj's constructor
+        for (var key in obj) {
+            temp[key] = cloneObject(obj[key]);
+        }
+
+        return temp;
+    }
+
+    function copyWithTrick(obj){
+        return JSON.parse(JSON.stringify(obj));
+    }
+
+
+
+    function isPlainObject(obj){
+        //这一步排除了obj为空，或者obj是DOM元素对象，或者obj是window，或者obj是Array等类型的情况
+        if(!obj || !util.isType(obj,"object") || obj.nodeType || "setInterval" in obj){
+            return false;
+        }
+        var hasOwn = Object.prototype.hasOwnProperty;
+        //这一步用来排除自定义构造函数创建出来的对象
+        try{
+            if(obj.constructor && !hasOwn.call(obj,"constructor") && !hasOwn.call(obj.constructor.prototype,"isPrototypeOf")){
+                return false;
+            }
+        }catch(e){
+            return false;
+        }
+        //
+        var key;
+        for(key in obj){};
+        return key === undefined || obj.hasOwnProperty(key);
+    }
+
+</script>
+</body>
+</html>

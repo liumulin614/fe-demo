@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+	Array.prototype.uniq = function () {
+		var i = 0,result = [],hasNaN = false,now;
+		for(; i < this.length ; i++){
+			now = this[i];
+    	//由于NaN的特殊性，因此用额外的方法判断
+    	if(typeof now === 'number' && now.toString() === 'NaN'){
+    		if(!hasNaN){
+    			result.push(now);
+    			hasNaN = true;
+    		}
+    		continue;
+    	}
+    	if(result.indexOf(now) < 0){
+    		result.push(now);
+    	}
+    }
+    return result;
+};
+var arr = [false, true, undefined, null, NaN,'NaN', 0, 1, {}, {}, 'a', 'a', NaN];
+// console.log(arr.uniq());
+console.log([false, true, undefined, null, NaN, 0, 1, {}, {}, 'a', 'a', NaN].uniq());
+</script>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+	
+function concat(arr1, arr2) {
+	return arr1.concat(arr2);
+}
+
+function insert(arr, item, index) {
+	return arr.slice(0,index).concat([item],arr.slice(index));
+}
+
+function count(arr, item) {
+    var regExp = new RegExp("\\b"+item+"\\b","g");
+	return arr.join(" ").match(regExp).length;
+}
+count([1, 2, 4, 4, 3, 4, 3], 3)
+
+
+
+
+</script>
+</html>

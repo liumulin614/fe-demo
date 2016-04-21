@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+	<frameset cols="25%,75%">
+		<frame src="1.html" name="a"></frame>
+
+		<frame src="2.html" name="b"></frame>
+	</frameset>
+<script type="text/javascript">
+	//关于函数的原型
+	function test(){
+	}
+
+	console.log(test.prototype);
+
+	console.log(Function.prototype);
+
+	console.log(test.prototype == Function.prototype);
+
+	// alert(fn);
+
+  function fn() {
+    return 'Hello world!';
+  }
+
+
+
+
+
+</script>
+
+
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8"/>
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+		
+	var request = createCORSRequest("get","http://localhost:8081/test");
+	if(request){
+		request.onload=function(){
+			alert(request.responseText);
+		}
+		request.send();
+	}else{
+		alert("无法创建跨域请求");
+	}
+
+	function createCORSRequest(method,url){
+		var xhr = new XMLHttpRequest();
+		if("withCredentials" in xhr){
+			alert("可以直接用xhr");
+			xhr.open(method,url,true);
+		}else if(typeof XDomainRequest !== 'undefined'){
+			xhr = new XDomainRequest();
+			xhr.open(method, url);
+		}else{
+			xhr = null;
+		}
+		return xhr;
+	}
+
+
+
+</script>
+</html>

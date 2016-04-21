@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>ImageSlider Test</title>
+    <style>
+        .banner {
+            width: 100%;
+            height: 350px;
+            text-align: center;
+            overflow: hidden;
+            position: relative; }
+
+        .banner_img {
+            width: 100%;
+            height: 100%;
+            background-position: center;
+            background-repeat: no-repeat; }
+
+        .slider-item-container,.slider-item{height: 100%;}
+        .vertical-adjust{height: 100%;width: 1px;margin-left: -1px;vertical-align: middle;display: inline-block;}
+        .slider-button {
+            position: absolute;
+            background: #ffffff;
+            width: 25px;
+            height: 60px;
+            top: 50%;
+            margin-top: -30px;
+            text-align: center;
+            cursor: pointer; }
+
+        .banner-left {
+            left: 0px; }
+
+        .banner-right {
+            right: 0px; }
+
+        .slider-button img {
+            vertical-align: middle; }
+    </style>
+</head>
+<body>
+<div id="banner-slider" class="banner slider">
+        <div class="banner_img slider-item" style="float: left;background-image: url('http://www.zghuide.com/assets/img/common/banner_1.jpg');"></div>
+        <div class="banner_img slider-item" style="float: left;background-image: url('http://www.zghuide.com/assets/img/common/banner_2.jpg');"></div>
+        <div class="banner_img slider-item" style="float: left;background-image: url('http://www.zghuide.com/assets/img/common/banner_3.jpg');"></div>
+    <div class="banner-left slider-button slider-left"><img src="http://www.zghuide.com/assets/img/common/banner-left.png"><span class="vertical-adjust"></span> </div>
+    <div class="banner-right slider-button slider-right"><img src="http://www.zghuide.com/assets/img/common/banner-right.png"><span class="vertical-adjust"></span></div>
+    <!--<div class="slider-dots" style="position: absolute; width: 100%; top: 297.5px; left: 0px; text-align: center;"><span class="slider-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; cursor: pointer; margin: 0px 5px; background-color: rgb(255, 255, 255);"></span><span class="slider-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; cursor: pointer; margin: 0px 5px; background-color: rgb(255, 0, 0);"></span><span class="slider-dot" style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; cursor: pointer; margin: 0px 5px; background-color: rgb(255, 255, 255);"></span></div></div>-->
+<script type="text/javascript" src="src/ImageSlider.js"></script>
+<script>
+    ImageSlider.init("banner-slider",{autoDots:false});
+</script>
+</body>
+</html>

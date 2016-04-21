@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html ng-app="directive">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+     <link rel="stylesheet" type="text/css" href="../css/bootstrap.css"/>
+    <script type="text/javascript" src="../lib/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("directive",[]);
+        app.directive("superman",function(){
+            return {
+                restrict:"AE",
+                scope:{},
+                controller:function($scope){
+                    $scope.abilities = [];
+                    this.addStrength = function(){
+                        $scope.abilities.push("strength");
+                    }
+                    this.addSpeed = function(){
+                        $scope.abilities.push("speed");
+                    }
+                    this.addLight = function(){
+                        $scope.abilities.push("light");
+                    }
+                },
+                link:function(scope, element, attrs){
+                    element.bind("click",function(){
+                        element.toggleClass("btn btn-primary");
+                        console.log(scope.abilities);
+                    })
+                }
+            }
+        })
+
+        app.directive("strength",function(){
+            return {
+                restrict:"AE",
+                require:"^superman",
+                link:function(scope, element,attrs,supermanCtrl){
+                    supermanCtrl.addStrength();
+                }
+            }
+        })
+        app.directive("speed",function(){
+            return {
+                require:"^superman",
+                link:function(scope, element,attrs,supermanCtrl){
+                    supermanCtrl.addSpeed();
+                }
+            }
+        })
+        app.directive("light",function(){
+            return {
+                require:"^superman",
+                link:function(scope, element,attrs,supermanCtrl){
+                    supermanCtrl.addLight();
+                }
+            }
+        })
+
+
+    </script>
+</head>
+<body>
+<div class="row">
+    <div class="col-md-3">
+        <superman strength>有力量的</superman>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <superman strength speed>有力量、有速度的</superman>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <superman strength speed light>有力量、有速度、有光的</superman>
+    </div>
+</div>
+</body>
+</html>

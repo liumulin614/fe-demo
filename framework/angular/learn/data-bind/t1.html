@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html ng-app="dataBind">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="../lib/angular.js"></script>
+    <script type="text/javascript">
+        var app = angular.module("dataBind",[]);
+    </script>
+</head>
+<body>
+<input ng-model="greeting.hello"/>
+<span>看这里：{{greeting.hello}}</span>
+</body>
+</html>
