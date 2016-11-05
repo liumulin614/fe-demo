@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Flex ShengBei</title>
+    <style>
+        html{
+            height: 100%;
+            overflow-y: auto;
+        }
+        body{
+            margin: 0px;
+            min-height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        header{
+            min-height: 100px;
+            background-color: #0000ff;
+        }
+        footer{
+            min-height: 200px;
+            background-color: #2b81af;
+        }
+        .content{
+            height: 200px;
+            background-color: #ffffff;
+            display: flex;
+            flex: 1;
+        }
+        .main-content{
+            flex:1;
+            background-color: #00bcd4;
+        }
+        .left-content{
+            width: 200px;
+            background-color: #00ff00;
+            order: -1;
+        }
+        .right-content{
+            width: 250px;
+            background-color: #00ff00;
+        }
+
+    </style>
+</head>
+<body>
+<header></header>
+<div class="content">
+    <div class="main-content"></div>
+    <div class="left-content"></div>
+    <div class="right-content"></div>
+</div>
+<footer></footer>
+</body>
+</html>
